@@ -1,0 +1,23 @@
+{
+  "name": "slash-traffic",
+  "version": "1.0.0",
+  "description": "get real time traffic and distance information between A and B",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nithinsivakumar/slash-traffic.git"
+  },
+  "author": "Nithin Sivakumar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nithinsivakumar/slash-traffic/issues"
+  },
+  "homepage": "https://github.com/nithinsivakumar/slash-traffic#readme",
+  "dependencies": {
+    "@google/maps": "^1.0.2",
+    "googlemaps": "^1.12.0"
+  }
+}
