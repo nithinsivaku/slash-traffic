@@ -6,3 +6,8 @@
  * formatting it into JSON objects that are recognized by Slack. It will delegate 
  * some of the business logic to other modules: commandParser, apiGateway and .
  */
+
+ const orgn = "Dover, NH";
+ const dest = "Durham, NH";
+ const api_key = "API_KEY";
+ 

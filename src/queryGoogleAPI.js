@@ -77,3 +77,5 @@ getDirections(params, googleMaps, function (result) {
     console.log(`Distance ${getDistance(result)} `);
     console.log(`duration ${getDuration(result)} `);
 });
+
+module.exports = getDirections
