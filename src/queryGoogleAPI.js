@@ -12,6 +12,29 @@ const params = {
     dest: dest
 };
 
+/**
+ * Return the right error message based on error code
+ * @param {Integer} code | http error code
+ * @param {String} err | error message
+ */
+const createErrorDescription = (code, err) => {
+    switch (code) {
+      case 400:
+        return 'Bad Request'
+      case 401:
+        return 'Unauthorized: Be sure you configured the integration to use a valid API key'
+      case 403:
+        return `Invalid request: ${err.source} ${err.message}`
+      case 404:
+        return `Not found: ${err.source} ${err.message}`
+      case 503:
+        return `Traffic service currently under maintanence. Retry later`
+      default:
+        return `Unexpected error connecting to Google API`
+    }
+  }
+
+
 // Create google api client with api_key
 const googleMaps = require('@google/maps').createClient({
     key: api_key
