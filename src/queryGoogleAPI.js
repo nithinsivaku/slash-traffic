@@ -4,7 +4,7 @@
  */
 
 const origin = "Durham, NH";
-let dest = "Dover, NH";
+let dest = "SanFrancisco";
 const api_key = 'XXX';
 
 const params = {

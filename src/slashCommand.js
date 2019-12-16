@@ -7,7 +7,11 @@
  * some of the business logic to other modules: commandParser, apiGateway and .
  */
 
- const orgn = "Dover, NH";
- const dest = "Durham, NH";
- const api_key = "API_KEY";
- 
+const request = {
+    origin: "Dover, NH",
+    dest: "Durham, NH"
+}
+
+const api_key = "API_KEY";
+
+
