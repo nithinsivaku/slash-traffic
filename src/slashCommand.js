@@ -6,12 +6,20 @@
  * formatting it into JSON objects that are recognized by Slack. It will delegate 
  * some of the business logic to other modules: commandParser, apiGateway and .
  */
+const queryGoogleMaps = require('./queryGoogleAPI');
 
 const request = {
     origin: "Dover, NH",
-    dest: "Durham, NH"
+    dest: "Portsmouth, NH"
 }
 
-const api_key = "API_KEY";
+const api_key = "XXX";
+
+
+queryGoogleMaps(request, api_key, function (result) {
+    console.log("Response: ");
+    console.log(`Distance ${result.distance} `);
+    console.log(`duration ${result.duration} `);
+});
 
 
