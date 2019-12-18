@@ -5,6 +5,6 @@
 
  const validateInput = (input) => {
      if(!input) {
-        return new Error('No source or destination given')
+        return new Error('No source or destination given');
      }
  }

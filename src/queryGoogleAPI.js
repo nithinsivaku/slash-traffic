@@ -49,7 +49,7 @@ const getDuration = (apiResult) => {
  * @param {Object} googleMaps | googleClientObject
  * @param {function} callback | process json response
  */
-const getDirections = (params, api_key, callback) => {
+const getDirections = (params, api_key) => new Promise((resolve, reject) => {
     
     // inititalize response json
     const res = {
@@ -57,7 +57,6 @@ const getDirections = (params, api_key, callback) => {
         duration: '',
         error: ''
     };
-
     const googleMaps = require('@google/maps').createClient({
         key: api_key
     });
@@ -69,8 +68,8 @@ const getDirections = (params, api_key, callback) => {
             } else {
                 res.error = err.message;
             }
-            callback(res);
+            resolve(res);
         });
-};
+})
 
 module.exports = getDirections
