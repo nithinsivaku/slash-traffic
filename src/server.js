@@ -30,7 +30,7 @@ const request = {
     dest: "Portsmouth, NH"
 }
 
-const api_key = "AIzaSyA8vb0LmPBSoZPcon4lfFMmoqrQCkdrric";
+const api_key = "XXXX";
 
 slashCommand(request, api_key)
     .then((res) => {
