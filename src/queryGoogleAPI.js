@@ -49,7 +49,7 @@ const getDuration = (apiResult) => {
  * @param {Object} googleMaps | googleClientObject
  * @param {function} callback | process json response
  */
-const getDirections = (params, api_key) => new Promise((resolve, reject) => {
+const getDirections = (api_key) => (params) => new Promise((resolve, reject) => {
     
     // inititalize response json
     const res = {
@@ -72,4 +72,10 @@ const getDirections = (params, api_key) => new Promise((resolve, reject) => {
         });
 })
 
-module.exports = getDirections
+const googleClient = (api_key) => (params) => {
+    const requestPromise = params.map(getDirections(api_key))
+    return Promise.all(requestPromise)
+}
+
+
+module.exports = googleClient
