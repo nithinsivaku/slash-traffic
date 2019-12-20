@@ -15,8 +15,12 @@
 //         })
 // })
 
-const slashCommandFactory = (googleClient, slackToken) => (body) => new Promise((resolve, reject) => {
-    googleClient(body)
+const slashCommandFactory = (getDirections, slackToken) => (body) => new Promise((resolve, reject) => {
+    const params = {
+        origin: "Dover, NH",
+        dest: "Durham, NH"
+    }
+    getDirections(params)
         .then((result) => {
             return resolve(result);
         })
