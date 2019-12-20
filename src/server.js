@@ -12,7 +12,8 @@
  */
 const Express = require('express');
 const bodyParser = require('body-parser');
-const slashCommand = require('./slashCommand')
+const slashCommandFactory = require('./slashCommand')
+const connectGoogleClient = require('./queryGoogleAPI')
 const app = new Express();
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -25,41 +26,29 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // }
 const port = 8080
 
-// const request = {
-//     origin: "Dover, NH",
-//     dest: "Portsmouth, NH"
-// }
+const request = {
+    origin: "Dover, NH",
+    dest: "Portsmouth, NH"
+}
 
-// const api_key = "XXXX";
+const api_key = "XXXXX"
+const slackToken = 'XXX'
 
+const googleClient = connectGoogleClient(api_key)
+const slashCommand = slashCommandFactory(googleClient, slackToken)
 
 app.post('/', (req, res) => {
-    const obj = req;
-    console.log(req.body);
-    console.log("print text")
-    console.log(req.body.text)
-    const result = "hello world";
-    return res.json(result)
+    slashCommand(req.body)
+        .then((result) => {
+            return res.json(result)
+        })
+        .catch(console.error)
+})
 
-    // slashCommand(req.body)
-    //   .then((result) => {
-    //     return res.json(result)
-    //   })
-    //   .catch(console.error)
-  })
-  
-  app.listen(port, () => {
+app.listen(port, () => {
     console.log(`Server started at localhost:${port}`)
-  })
+})
 
-
-// slashCommand(request, api_key)
-//     .then((res) => {
-//         console.log("Response: ");
-//         console.log(`Distance ${res.distance} `);
-//         console.log(`duration ${res.duration} `);
-//     })
-//     .catch(console.error)
 
 
 

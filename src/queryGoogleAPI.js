@@ -72,10 +72,5 @@ const getDirections = (api_key) => (params) => new Promise((resolve, reject) => 
         });
 })
 
-const googleClient = (api_key) => (params) => {
-    const requestPromise = params.map(getDirections(api_key))
-    return Promise.all(requestPromise)
-}
 
-
-module.exports = googleClient
+module.exports = getDirections
