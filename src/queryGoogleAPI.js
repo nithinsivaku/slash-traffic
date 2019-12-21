@@ -49,7 +49,7 @@ const getDuration = (apiResult) => {
  * @param {Object} googleMaps | googleClientObject
  * @param {function} callback | process json response
  */
-const getDirections = (api_key) => (params) => new Promise((resolve, reject) => {
+const getDirections = (api_key) => (origin, dest) => new Promise((resolve, reject) => {
     
     // inititalize response json
     const res = {
@@ -60,7 +60,7 @@ const getDirections = (api_key) => (params) => new Promise((resolve, reject) => 
     const googleMaps = require('@google/maps').createClient({
         key: api_key
     });
-    googleMaps.directions({ 'origin': params.origin, 'destination': params.dest },
+    googleMaps.directions({ 'origin': origin, 'destination': dest },
         function (err, response) {
             if (!err) {
                 res.distance = getDistance(response.json);

@@ -31,23 +31,33 @@ const request = {
     dest: "Portsmouth, NH"
 }
 
+
+
 const api_key = "XXXXX"
 const slackToken = 'XXX'
 
 const googleClient = connectGoogleClient(api_key)
 const slashCommand = slashCommandFactory(googleClient, slackToken)
+const text = "'Dover, NH' 'Portsmouth, NH'"
 
-app.post('/', (req, res) => {
-    slashCommand(req.body)
-        .then((result) => {
-            return res.json(result)
-        })
-        .catch(console.error)
-})
+slashCommand(text)
+    .then((result) => {
+        return res.json(result)
+    })
+    .catch(console.error)
 
-app.listen(port, () => {
-    console.log(`Server started at localhost:${port}`)
-})
+
+// app.post('/', (req, res) => {
+//     slashCommand(req.body)
+//         .then((result) => {
+//             return res.json(result)
+//         })
+//         .catch(console.error)
+// })
+
+// app.listen(port, () => {
+//     console.log(`Server started at localhost:${port}`)
+// })
 
 
 
