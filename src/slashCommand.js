@@ -7,20 +7,14 @@
  * some of the business logic to other modules: commandParser, apiGateway and .
  */
 
-
-// const processSlashCommand = (body, api_key) => new Promise((resolve, reject) => {
-//     getDirections(body, api_key)
-//         .then((result) => {
-//             return resolve(result);
-//         })
-// })
+const processCommand = require('./commandParser')
 
 const slashCommandFactory = (getDirections, slackToken) => (body) => new Promise((resolve, reject) => {
-    const params = {
-        origin: "Dover, NH",
-        dest: "Durham, NH"
+    const command = processCommand(body)
+    if(typeof command.error == undefined) {
+        return resolve(command.error)
     }
-    getDirections(params)
+    getDirections(origin, dest)
         .then((result) => {
             return resolve(result);
         })
