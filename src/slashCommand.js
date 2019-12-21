@@ -14,12 +14,6 @@ const slashCommandFactory = (getDirections, slackToken) => (body) => new Promise
     if(typeof command.error == undefined) {
         return resolve(command.error)
     }
-    
-
-
-
-
-
     getDirections(origin, dest)
         .then((result) => {
             return resolve(result);
