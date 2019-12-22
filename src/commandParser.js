@@ -64,7 +64,7 @@ const commandParser = (body) => {
         error: ''
     }
     result.error = validateInputCommand(params)
-    if(result.error) return result
+    if(typeof result.error == undefined) return result
     const parsed = formatInput(params)
     if(size == 1) {
         result.origin = '75+Portsmouth+Blvd+Suite+130+Portsmouth+NH+03801'
