@@ -33,7 +33,7 @@ const request = {
 
 
 
-const api_key = "AIzaSyAtN6nPlkkjTQWsSKE-IDLD49jdZuOtU9Q"
+const api_key = "XXX"
 const slackToken = 'XXX'
 
 const googleClient = connectGoogleClient(api_key)
