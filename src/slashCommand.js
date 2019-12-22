@@ -17,6 +17,7 @@ const processCommand = require('./commandParser')
  */
 const slashCommandFactory = (getDirections, slackToken) => (body) => new Promise((resolve, reject) => {
     const command = processCommand(body)
+    console.log(`${command.origin} -> ${command.dest}`)
     if (typeof command.error == undefined) {
         return resolve(command.error)
     }

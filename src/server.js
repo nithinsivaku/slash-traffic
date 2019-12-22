@@ -26,14 +26,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // }
 const port = 8080
 
-const request = {
-    origin: "Dover, NH",
-    dest: "Portsmouth, NH"
-}
 
 
 
-const api_key = "XXX"
+
+const api_key = "AIzaSyAtN6nPlkkjTQWsSKE-IDLD49jdZuOtU9Q"
 const slackToken = 'XXX'
 
 const googleClient = connectGoogleClient(api_key)
@@ -48,7 +45,8 @@ const text = "'Dover, NH' 'Portsmouth, NH'"
 
 
 app.post('/', (req, res) => {
-    slashCommand(req.body)
+    console.log(req.body.text)
+    slashCommand(req.body.text)
         .then((result) => {
             return res.json(result)
         })
