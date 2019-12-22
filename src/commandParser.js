@@ -2,6 +2,7 @@
  * commandParser take an arbitrary string of text/ 2 strings
  * and extract origin and destination informations for slashcommand to process.
  */
+const validateInputCommand = require('./validateInput')
 
 const parse = (text) => {
     let result
@@ -15,7 +16,7 @@ const format = (params) => {
     const quoteRgx = /'/g
     let formatted = Array
     for (let index = 0; index < params.length; index++) {
-        formatted[index] = params[index].replace(quoteRgx,'').replace(spaceRgx,'+');
+        formatted[index] = params[index].replace(quoteRgx, '').replace(spaceRgx, '+');
     }
     return formatted
 }
@@ -24,7 +25,7 @@ const commandParser = (body) => {
     const params = parse(body)
     const size = params.length
     const result = {
-        origin: '75+Portsmouth+Blvd+Suite+130,+Portsmouth,+NH+03801',
+        origin: '75 Portsmouth Blvd Suite 130, Portsmouth, NH 03801',
         dest: '',
         error: ''
     }
