@@ -2,16 +2,34 @@
  * commandParser take an arbitrary string of text/ 2 strings
  * and extract origin and destination informations for slashcommand to process.
  */
-const validateInputCommand = require('./validateInput')
 
-const parse = (text) => {
+/**
+* implements some validation rule to check if the input 
+* is something that can be used with the googleAPIs to 
+* get distance and traffic.
+* @param {array} input
+* return {String} error
+*/
+const validateInputCommand = (input) => {
+    let error
+    const size = input.length
+    if (size == 0) {
+        error = 'No destination provided! Please see the usage by typing /traffic in the message box.'
+    } else if (size > 2) {
+        error = 'Multiple places found! You can specify atmost two places.'
+    }
+    return error
+}
+
+
+const parseInput = (text) => {
     let result
     const regEx = /\'.*?\'/g;
     result = text.match(regEx)
     return result
 }
 
-const format = (params) => {
+const formatInput = (params) => {
     const spaceRgx = / /g
     const quoteRgx = /'/g
     let formatted = Array
@@ -22,29 +40,24 @@ const format = (params) => {
 }
 
 const commandParser = (body) => {
-    const params = parse(body)
+    const params = parseInput(body)
     const size = params.length
     const result = {
-        origin: '75 Portsmouth Blvd Suite 130, Portsmouth, NH 03801',
+        origin: '',
         dest: '',
         error: ''
     }
-
-    if (size == 0) {
-        result.error = 'No destination provided'
-        return result
-    } else if (size > 2) {
-        result.error = 'Check your arguments! Traffic app accepts either one or two arguments and not more than two.'
-        return result
+    result.error = validateInputCommand(params)
+    if(result.error) return result
+    const parsed = formatInput(params)
+    if(size == 1) {
+        result.origin = '75+Portsmouth+Blvd+Suite+130+Portsmouth+NH+03801'
+        result.dest = parsed[0]
     } else {
-        const parsed = format(params)
-        if (size == 1) {
-            result.dest = parsed[0]
-        } else {
-            result.origin = parsed[0]
-            result.dest = parsed[1]
-        }
+        result.origin = parsed[0]
+        result.dest = parsed[1]
     }
+
     return result
 }
 
