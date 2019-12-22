@@ -21,7 +21,12 @@ const validateInputCommand = (input) => {
     return error
 }
 
-
+/**
+ * Split the input text into source and destination.
+ * A regex that splits string based on single quotes
+ * @param {String} text 
+ * return {array} result 
+ */
 const parseInput = (text) => {
     let result
     const regEx = /\'.*?\'/g;
@@ -29,6 +34,11 @@ const parseInput = (text) => {
     return result
 }
 
+/**
+ * Modify the input text into google maps format.
+ * @param {array} params 
+ * return {array} result
+ */
 const formatInput = (params) => {
     const spaceRgx = / /g
     const quoteRgx = /'/g
@@ -39,6 +49,12 @@ const formatInput = (params) => {
     return formatted
 }
 
+/**
+ * Parse the input text for slashcommand module.
+ * The origin is by default local address.
+ * @param {String} body
+ * return {array} result 
+ */
 const commandParser = (body) => {
     const params = parseInput(body)
     const size = params.length
