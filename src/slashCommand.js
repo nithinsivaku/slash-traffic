@@ -11,9 +11,9 @@ const processCommand = require('./commandParser')
  * It will also invoke ggogleAPI module and manage the response, formatting 
  * into JSON Objects for the Slack. 
  * 
- * 
- * @param {*} getDirections 
- * @param {*} slackToken 
+ * @param {method} getDirections 
+ * @param {String} slackToken 
+ * @param {String} body
  */
 const slashCommandFactory = (getDirections, slackToken) => (body) => new Promise((resolve, reject) => {
     const command = processCommand(body)
@@ -26,6 +26,5 @@ const slashCommandFactory = (getDirections, slackToken) => (body) => new Promise
             return resolve(result);
         })
 })
-
 
 module.exports = slashCommandFactory
