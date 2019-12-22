@@ -73,7 +73,6 @@ const commandParser = (body) => {
         result.origin = parsed[0]
         result.dest = parsed[1]
     }
-
     return result
 }
 
