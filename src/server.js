@@ -12,33 +12,53 @@
  */
 const Express = require('express');
 const bodyParser = require('body-parser');
-const slashCommand = require('./slashCommand')
+const slashCommandFactory = require('./slashCommand')
+const connectGoogleClient = require('./queryGoogleAPI')
 const app = new Express();
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-// // verify if the app has been initialized with all the necessary environment variables
-// const { SLACK_TOKEN: slackToken, GOOGLE_APIKEY: apiKey, PORT } = process.env
-// if (!slackToken || !apiKey) {
+// verify if the app has been initialized with all the necessary environment variables
+// const { SLACK_TOKEN: slackToken, GOOGLE_APIKEY: api_key, PORT } = process.env
+// if (!slackToken || !api_key) {
 //     console.error('missing environment variables SLACK_TOKEN and/or GOOGLE_APIKEY');
 //     process.exit(1)
 // }
-
+const port = 8080
 
 const request = {
     origin: "Dover, NH",
     dest: "Portsmouth, NH"
 }
 
-const api_key = "XXXX";
 
-slashCommand(request, api_key)
-    .then((res) => {
-        console.log("Response: ");
-        console.log(`Distance ${res.distance} `);
-        console.log(`duration ${res.duration} `);
+
+const api_key = "XXXXX"
+const slackToken = 'XXX'
+
+const googleClient = connectGoogleClient(api_key)
+const slashCommand = slashCommandFactory(googleClient, slackToken)
+const text = "'Dover, NH' 'Portsmouth, NH'"
+
+slashCommand(text)
+    .then((result) => {
+        return res.json(result)
     })
     .catch(console.error)
+
+
+// app.post('/', (req, res) => {
+//     slashCommand(req.body)
+//         .then((result) => {
+//             return res.json(result)
+//         })
+//         .catch(console.error)
+// })
+
+// app.listen(port, () => {
+//     console.log(`Server started at localhost:${port}`)
+// })
+
 
 
 
