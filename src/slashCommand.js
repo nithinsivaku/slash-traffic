@@ -5,12 +5,20 @@
 
 const processCommand = require('./commandParser')
 
+/**
+ * Creates an error attachment based on slack message format
+ * @param {String} error  
+ */
 const createErrorResponse = (error) => ({
     color: 'danger',
     text: `*Error*:\n${error}`,
     mrkdwn_in: ['text']
 })
 
+/**
+ * Fromat the success message attachement
+ * @param {array} result 
+ */
 const createSuccessResponse = (result) => ({
     color: 'good',
     text: `Distance - ${result.distance} \n Duration - ${result.duration}`,

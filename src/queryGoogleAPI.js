@@ -42,13 +42,13 @@ const getDuration = (apiResult) => {
 };
 
 /**
- * Create google api client with provided api_key
- * Get the distance and duration between places by calling
- * Google Directions api
- * @param {array} params | input parameters
- * @param {Object} googleMaps | googleClientObject
- * @param {function} callback | process json response
- */
+* Create google api client with provided api_key
+* Get the distance and duration between places by calling
+* Google Directions api
+* @param {String} api_key
+* @param {String} origin
+* @param {String} destination
+*/
 const getDirections = (api_key) => (origin, dest) => new Promise((resolve, reject) => {
 
     // inititalize response json
