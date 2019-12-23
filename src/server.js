@@ -21,20 +21,10 @@ if (!slackToken || !api_key) {
 }
 
 const port = 8080
-// const api_key = 'AIzaSyAtN6nPlkkjTQWsSKE-IDLD49jdZuOtU9Q'
-// const slackToken = 'XXX'
 
 // initialize google and slack client with api_key and slacktoken
 const googleClient = connectGoogleClient(api_key)
 const slashCommand = slashCommandFactory(googleClient, slackToken)
-
-//test code, leaving it here for now
-// const text = "'Dover, NH' 'Portsmout, NH'"
-// slashCommand(text)
-//     .then((result) => {
-//         return res.json(result)
-//     })
-//     .catch(console.error)
 
 //app servers as an entry point for the whole app
 app.post('/', (req, res) => {
