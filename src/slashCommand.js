@@ -5,6 +5,12 @@
 
 const processCommand = require('./commandParser')
 
+const createErrorResponse = (error) => ({
+    color: 'danger',
+    text: `*Error*:\n${error}`,
+    mrkdwn_in: ['text']
+})
+
 /**
  * It reiceves the content of the request coming from the Slack server and 
  * will use commadParser module to process it and validate it.
@@ -18,8 +24,11 @@ const processCommand = require('./commandParser')
 const slashCommandFactory = (getDirections, slackToken) => (body) => new Promise((resolve, reject) => {
     const command = processCommand(body)
     console.log(`${command.origin} -> ${command.dest}`)
-    if (typeof command.error == undefined) {
-        return resolve(command.error)
+    if (typeof command.error != undefined) {
+        return resolve({
+            text: '',
+            attachments: [createErrorResponse(command.error)]
+        })
     }
     getDirections(command.origin, command.dest)
         .then((result) => {

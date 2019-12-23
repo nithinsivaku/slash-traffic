@@ -12,6 +12,10 @@
 */
 const validateInputCommand = (input) => {
     let error
+    if(!input) {
+        error = 'Not a valid address to find distance and duration'
+        return error
+    }
     const size = input.length
     if (size == 0) {
         error = 'No destination provided! Please see the usage by typing /traffic in the message box.'
@@ -57,14 +61,14 @@ const formatInput = (params) => {
  */
 const commandParser = (body) => {
     const params = parseInput(body)
-    const size = params.length
     const result = {
         origin: '',
         dest: '',
         error: ''
     }
     result.error = validateInputCommand(params)
-    if(typeof result.error == undefined) return result
+    if(typeof result.error != undefined) return result
+    const size = params.length
     const parsed = formatInput(params)
     if(size == 1) {
         result.origin = '75+Portsmouth+Blvd+Suite+130+Portsmouth+NH+03801'
