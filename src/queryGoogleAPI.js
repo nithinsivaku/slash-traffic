@@ -72,4 +72,5 @@ const getDirections = (api_key) => (origin, dest) => new Promise((resolve, rejec
         });
 })
 
+
 module.exports = getDirections
