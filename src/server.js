@@ -13,42 +13,42 @@ const connectGoogleClient = require('./queryGoogleAPI')
 const app = new Express();
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// erify if the app has been initialized with all the necessary environment variables
-// const { SLACK_TOKEN: slackToken, GOOGLE_APIKEY: api_key, PORT } = process.env
-// if (!slackToken || !api_key) {
-//     console.error('missing environment variables SLACK_TOKEN and/or GOOGLE_APIKEY');
-//     process.exit(1)
-// }
+// verify if the app has been initialized with all the necessary environment variables
+const { SLACK_TOKEN: slackToken, GOOGLE_APIKEY: api_key, PORT } = process.env
+if (!slackToken || !api_key) {
+    console.error('missing environment variables SLACK_TOKEN and/or GOOGLE_APIKEY');
+    process.exit(1)
+}
+
 const port = 8080
-const api_key = 'XXX'
-const slackToken = 'XXX'
+// const api_key = 'AIzaSyAtN6nPlkkjTQWsSKE-IDLD49jdZuOtU9Q'
+// const slackToken = 'XXX'
 
 // initialize google and slack client with api_key and slacktoken
 const googleClient = connectGoogleClient(api_key)
 const slashCommand = slashCommandFactory(googleClient, slackToken)
 
 //test code, leaving it here for now
-
-const text = "'Dover, NH' 'Portsmout, NH'"
-slashCommand(text)
-    .then((result) => {
-        return res.json(result)
-    })
-    .catch(console.error)
+// const text = "'Dover, NH' 'Portsmout, NH'"
+// slashCommand(text)
+//     .then((result) => {
+//         return res.json(result)
+//     })
+//     .catch(console.error)
 
 //app servers as an entry point for the whole app
-// app.post('/', (req, res) => {
-//     console.log(req.body.text)
-//     slashCommand(req.body.text)
-//         .then((result) => {
-//             return res.json(result)
-//         })
-//         .catch(console.error)
-// })
+app.post('/', (req, res) => {
+    console.log(req.body.text)
+    slashCommand(req.body.text)
+        .then((result) => {
+            return res.json(result)
+        })
+        .catch(console.error)
+})
 
-// app.listen(port, () => {
-//     console.log(`Server started at localhost:${port}`)
-// })
+app.listen(port, () => {
+    console.log(`Server started at localhost:${port}`)
+})
 
 
 

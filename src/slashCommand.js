@@ -39,7 +39,7 @@ const slashCommandFactory = (getDirections, slackToken) => (body) => new Promise
     getDirections(command.origin, command.dest)
         .then((result) => {
             return resolve({
-                text: `${result.header.origin} to ${comresult.header.dest}`,
+                text: `${command.header.origin} to ${command.header.dest}`,
                 attachments: [createSuccessResponse(result)]
             })
         })
