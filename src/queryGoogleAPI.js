@@ -3,11 +3,11 @@
  * distance and traffic informations.
  */
 
- /**
- * Return the right error message based on error code
- * @param {Integer} code | http error code
- * @param {String} err | error message
- */
+/**
+* Return the right error message based on error code
+* @param {Integer} code | http error code
+* @param {String} err | error message
+*/
 const createErrorDescription = (code, err) => {
     switch (code) {
         case 400:
@@ -50,7 +50,7 @@ const getDuration = (apiResult) => {
  * @param {function} callback | process json response
  */
 const getDirections = (api_key) => (origin, dest) => new Promise((resolve, reject) => {
-    
+
     // inititalize response json
     const res = {
         distance: '',
