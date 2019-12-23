@@ -13,7 +13,7 @@ const connectGoogleClient = require('./queryGoogleAPI')
 const app = new Express();
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// verify if the app has been initialized with all the necessary environment variables
+// erify if the app has been initialized with all the necessary environment variables
 // const { SLACK_TOKEN: slackToken, GOOGLE_APIKEY: api_key, PORT } = process.env
 // if (!slackToken || !api_key) {
 //     console.error('missing environment variables SLACK_TOKEN and/or GOOGLE_APIKEY');
@@ -22,19 +22,21 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const port = 8080
 const api_key = 'XXX'
 const slackToken = 'XXX'
+
 // initialize google and slack client with api_key and slacktoken
 const googleClient = connectGoogleClient(api_key)
 const slashCommand = slashCommandFactory(googleClient, slackToken)
 
 //test code, leaving it here for now
-const text = ""
+
+const text = "'Dover, NH' 'Portsmout, NH'"
 slashCommand(text)
     .then((result) => {
         return res.json(result)
     })
     .catch(console.error)
 
-// app servers as an entry point for the whole app
+//app servers as an entry point for the whole app
 // app.post('/', (req, res) => {
 //     console.log(req.body.text)
 //     slashCommand(req.body.text)

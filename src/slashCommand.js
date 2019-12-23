@@ -11,6 +11,12 @@ const createErrorResponse = (error) => ({
     mrkdwn_in: ['text']
 })
 
+const createSuccessResponse = (result) => ({
+    color: 'good',
+    text: `Distance - ${result.distance} \n Duration - ${result.duration}`,
+    mrkdwn_in: ['text']
+  })
+
 /**
  * It reiceves the content of the request coming from the Slack server and 
  * will use commadParser module to process it and validate it.
@@ -24,7 +30,7 @@ const createErrorResponse = (error) => ({
 const slashCommandFactory = (getDirections, slackToken) => (body) => new Promise((resolve, reject) => {
     const command = processCommand(body)
     console.log(`${command.origin} -> ${command.dest}`)
-    if (typeof command.error != undefined) {
+    if (typeof command.error !== 'undefined') {
         return resolve({
             text: '',
             attachments: [createErrorResponse(command.error)]
@@ -32,7 +38,10 @@ const slashCommandFactory = (getDirections, slackToken) => (body) => new Promise
     }
     getDirections(command.origin, command.dest)
         .then((result) => {
-            return resolve(result);
+            return resolve({
+                text: `${result.header.origin} to ${comresult.header.dest}`,
+                attachments: [createSuccessResponse(result)]
+            })
         })
 })
 

@@ -62,21 +62,31 @@ const formatInput = (params) => {
 const commandParser = (body) => {
     const params = parseInput(body)
     const result = {
+        header: '',
         origin: '',
         dest: '',
         error: ''
     }
+    const header = {
+        origin: '',
+        dest: ''
+    }
     result.error = validateInputCommand(params)
-    if(typeof result.error != undefined) return result
+    if(typeof result.error !== 'undefined') return result
     const size = params.length
     const parsed = formatInput(params)
     if(size == 1) {
+        header.origin = 'C3 Metrics'
+        header.dest = params[0]
         result.origin = '75+Portsmouth+Blvd+Suite+130+Portsmouth+NH+03801'
         result.dest = parsed[0]
     } else {
+        header.origin = params[0]
+        header.dest = params[1]
         result.origin = parsed[0]
         result.dest = parsed[1]
     }
+    result.header = header
     return result
 }
 
