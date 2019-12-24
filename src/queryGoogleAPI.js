@@ -8,7 +8,7 @@
 * @param {Integer} code | http error code
 * @param {String} err | error message
 */
-const createErrorDescription = (code, err) => {
+const createErrorDescription = (code) => {
     switch (code) {
         case 400:
             return 'Bad Request'
@@ -66,7 +66,7 @@ const getDirections = (api_key) => (origin, dest) => new Promise((resolve, rejec
                 res.distance = getDistance(response.json);
                 res.duration = getDuration(response.json);
             } else {
-                res.error = err.message;
+                res.error = createErrorDescription(err.status);
             }
             resolve(res);
         });
