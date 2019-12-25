@@ -4,10 +4,10 @@
  */
 
 /**
-* Return the right error message based on error code
-* @param {Integer} code | http error code
-* @param {String} err | error message
-*/
+ * Return the right error message based on error code
+ * @param {Integer} code | http error code
+ * @param {String} err | error message
+ */
 const createErrorDescription = (code) => {
     switch (code) {
         case 400:
@@ -42,13 +42,13 @@ const getDuration = (apiResult) => {
 };
 
 /**
-* Create google api client with provided api_key
-* Get the distance and duration between places by calling
-* Google Directions api
-* @param {String} api_key
-* @param {String} origin
-* @param {String} destination
-*/
+ * Create google api client with provided api_key
+ * Get the distance and duration between places by calling
+ * Google Directions api
+ * @param {String} api_key
+ * @param {String} origin
+ * @param {String} destination
+ */
 const getDirections = (api_key) => (origin, dest) => new Promise((resolve, reject) => {
 
     // inititalize response json
@@ -61,7 +61,7 @@ const getDirections = (api_key) => (origin, dest) => new Promise((resolve, rejec
         key: api_key
     });
     googleMaps.directions({ 'origin': origin, 'destination': dest },
-        function (err, response) {
+        function(err, response) {
             if (!err) {
                 res.distance = getDistance(response.json);
                 res.duration = getDuration(response.json);
@@ -71,6 +71,5 @@ const getDirections = (api_key) => (origin, dest) => new Promise((resolve, rejec
             resolve(res);
         });
 })
-
 
 module.exports = getDirections
