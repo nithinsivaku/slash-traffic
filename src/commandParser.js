@@ -1,18 +1,18 @@
 /**
- * commandParser take an arbitrary string of text/ 2 strings
- * and extract origin and destination informations for slashcommand to process.
+ * commandParser take an arbitrary string of text/ 2 strings and
+ * extract origin and destination informations for slashcommand to process.
  */
 
 /**
-* implements some validation rule to check if the input 
-* is something that can be used with the googleAPIs to 
-* get distance and traffic.
-* @param {array} input
-* return {String} error
-*/
+ * implements some validation rule to check if the input 
+ * is something that can be used with the googleAPIs to 
+ * get distance and traffic.
+ * @param {array} input
+ * return {String} error
+ */
 const validateInputCommand = (input) => {
     let error
-    if(!input) {
+    if (!input) {
         error = 'Not a valid address to find distance and duration'
         return error
     }
@@ -72,10 +72,10 @@ const commandParser = (body) => {
         dest: ''
     }
     result.error = validateInputCommand(params)
-    if(typeof result.error !== 'undefined') return result
+    if (typeof result.error !== 'undefined') return result
     const size = params.length
     const parsed = formatInput(params)
-    if(size == 1) {
+    if (size == 1) {
         header.origin = 'C3 Metrics'
         header.dest = params[0]
         result.origin = '75+Portsmouth+Blvd+Suite+130+Portsmouth+NH+03801'

@@ -16,19 +16,19 @@ const createErrorResponse = (error) => ({
 })
 
 /**
- * Fromat the success message attachement
+ * Format success message attachement
  * @param {array} result 
  */
 const createSuccessResponse = (result) => ({
     color: 'good',
     text: `Distance - ${result.distance} \n Duration - ${result.duration}`,
     mrkdwn_in: ['text']
-  })
+})
 
 /**
- * It reiceves the content of the request coming from the Slack server and 
- * will use commadParser module to process it and validate it.
- * It will also invoke ggogleAPI module and manage the response, formatting 
+ * This function recieves the content of the request coming from the Slack server 
+ * This will use commadParser module to process input and validate it.
+ * It will also invoke googleAPI module, manage the response, formatting 
  * into JSON Objects for the Slack. 
  * 
  * @param {method} getDirections 
@@ -46,7 +46,7 @@ const slashCommandFactory = (getDirections, slackToken) => (body) => new Promise
     }
     getDirections(command.origin, command.dest)
         .then((result) => {
-            if(typeof result.error !== 'undefined') {
+            if (typeof result.error !== 'undefined') {
                 return resolve({
                     text: '',
                     attachments: [createErrorResponse(result.error)]

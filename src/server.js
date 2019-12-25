@@ -26,7 +26,7 @@ const port = 8080
 const googleClient = connectGoogleClient(api_key)
 const slashCommand = slashCommandFactory(googleClient, slackToken)
 
-//app servers as an entry point for the whole app
+//app serves as an entry point for the whole app
 app.post('/', (req, res) => {
     console.log(req.body.text)
     slashCommand(req.body.text)
@@ -39,8 +39,3 @@ app.post('/', (req, res) => {
 app.listen(port, () => {
     console.log(`Server started at localhost:${port}`)
 })
-
-
-
-
-
