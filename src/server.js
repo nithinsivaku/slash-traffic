@@ -36,6 +36,6 @@ app.post('/', (req, res) => {
         .catch(console.error)
 })
 
-app.listen(port, () => {
+app.listen(PORT, () => {
     console.log(`Server started at localhost:${port}`)
 })
