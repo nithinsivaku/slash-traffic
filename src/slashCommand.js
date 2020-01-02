@@ -46,14 +46,14 @@ const slashCommandFactory = (getDirections, slackToken) => (body) => new Promise
     }
     getDirections(command.origin, command.dest)
         .then((result) => {
-            if (typeof result.error !== 'undefined') {
+            if (result.error !== '') {
                 return resolve({
                     text: '',
                     attachments: [createErrorResponse(result.error)]
                 })
             }
             return resolve({
-                text: `${command.header.origin} to ${command.header.dest}`,
+                text: `Real time traffic from ${command.header.origin} to ${command.header.dest}`,
                 attachments: [createSuccessResponse(result)]
             })
         })
