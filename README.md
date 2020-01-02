@@ -1,4 +1,4 @@
-# slash-traffic
+# /traffic
 
 ## Get real time traffic details without leaving slack!!!
 
