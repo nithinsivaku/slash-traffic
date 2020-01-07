@@ -20,8 +20,6 @@ if (!slackToken || !api_key) {
     process.exit(1)
 }
 
-const port = 8080
-
 // initialize google and slack client with api_key and slacktoken
 const googleClient = connectGoogleClient(api_key)
 const slashCommand = slashCommandFactory(googleClient, slackToken)
